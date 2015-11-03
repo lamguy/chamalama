@@ -50,6 +50,6 @@ test:
 #
 production:
   <<: *default
-  database: chamalama_production
+  database: chamalama
   username: chamalama
   password: <%= ENV['CHAMALAMA_DATABASE_PASSWORD'] %>
