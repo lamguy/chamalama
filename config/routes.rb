@@ -7,8 +7,9 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
   
-  resources :comments
-  resources :articles
+  resources :articles do
+    resources :comments
+  end
 
   get 'home/index'
 
@@ -18,7 +19,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'home#index'
 
-  get 'users/:id' => 'users#show'
+  get '/:id' => 'users#show'
   
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

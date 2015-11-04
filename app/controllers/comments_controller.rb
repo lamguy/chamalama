@@ -25,13 +25,15 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     # @article.create_activity key: 'article.commented_on', owner: current_user
+    @article = Article.friendly.find(params[:article_id])
 
-    @comment = Comment.new(comment_params)
+    @comment = current_user.comments.build(comment_params)
+    @comment.article_id = @article.id
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
-        format.json { render :show, status: :created, location: @comment }
+        format.html { redirect_to @article, notice: 'Comment was successfully created.' }
+        format.json { render :show, status: :created, location: @article }
       else
         format.html { render :new }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
