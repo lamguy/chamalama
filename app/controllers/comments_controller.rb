@@ -24,6 +24,8 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
+    # @article.create_activity key: 'article.commented_on', owner: current_user
+
     @comment = Comment.new(comment_params)
 
     respond_to do |format|
