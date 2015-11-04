@@ -21,3 +21,11 @@
     <% end %>
   </tbody>
 </table>
+
+<h3>Recent Activities</h3>
+
+<ul>
+  <% @activities.each do |activity| %>
+  <li><%= render_activity activity %></li>
+  <% end %>
+</ul>
