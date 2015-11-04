@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
-  resources :comments
-  resources :articles
+  get 'users/show'
+
+  get 'user/show'
+
   devise_for :users, controllers: {
     sessions: 'users/sessions'
   }
   
+  resources :comments
+  resources :articles
+
   get 'home/index'
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -13,6 +18,8 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'home#index'
 
+  get 'users/:id' => 'users#show'
+  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
