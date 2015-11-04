@@ -8,4 +8,7 @@ class Article < ActiveRecord::Base
 
   belongs_to :user
   has_many :comments
+
+  has_many :tags, :through => :article_taggable
+  has_many :article_taggables
 end
