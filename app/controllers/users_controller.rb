@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :follow, :unfollow]
   def show
     @articles   = @user.articles      
-    @activities = PublicActivity::Activity.order("created_at DESC").where(owner_id: current_user, owner_type: "User")
+    @activities = PublicActivity::Activity.order("created_at DESC").where(owner_id: @user, owner_type: "User")
   end
 
   def follow
