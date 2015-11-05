@@ -21,6 +21,9 @@ Rails.application.routes.draw do
   get '/:id' => 'users#show', as: 'profile'
   get '/:id/follow' => 'users#follow', as: 'follow'
   get '/:id/unfollow' => 'users#unfollow', as: 'unfollow'
+
+  get '/articles/:article_id/comments/:id/vote_up' => 'comments#vote_up', as: 'vote_up_comment'
+  get '/articles/:article_id/comments/:id/vote_down' => 'comments#vote_down', as: 'vote_down_comment'
   
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

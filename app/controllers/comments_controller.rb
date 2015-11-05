@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: [:show, :edit, :update, :destroy]
+  before_action :set_comment, only: [:show, :edit, :update, :destroy, :vote_up, :vote_down]
 
   # GET /comments
   # GET /comments.json
@@ -62,6 +62,22 @@ class CommentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def vote_up
+    @article = Article.friendly.find(params[:article_id])
+    @comment.add_or_update_evaluation(:votes, 1, current_user)
+    respond_to do |format|
+      format.json { render :vote_up, status: :ok, location: article_comment_path(@article, @comment) }
+    end
+  end
+
+  def vote_down
+    @article = Article.friendly.find(params[:article_id])
+    @comment.add_or_update_evaluation(:votes, -1, current_user)
+    respond_to do |format|
+      format.json { render :vote_down, status: :ok, location: article_comment_path(@article, @comment) }
     end
   end
 
