@@ -29,6 +29,7 @@ gem 'activerecord-reputation-system'
 gem 'public_activity'
 gem 'cancan'
 gem 'mina'
+gem "acts_as_follower"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
