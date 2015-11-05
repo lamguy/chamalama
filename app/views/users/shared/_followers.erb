@@ -1,0 +1,7 @@
+<%- if @user.follow_count == 1 %>
+  (<%= @user.follow_count %> follower)
+<% end -%>
+
+<%- if @user.follow_count > 1  %>
+  (<%= @user.follow_count %> followers)
+<% end -%>
