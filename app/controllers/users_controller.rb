@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if current_user.follow(@user)
-        format.html { redirect_to profile_path(@user), notice: "You are now following #{current_user.username}"  }
+        format.html { redirect_to profile_path(@user), notice: "You are now following #{@user.username}"  }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if current_user.stop_following(@user)
-        format.html { redirect_to profile_path(@user), notice: "You are not following #{current_user.username}"  }
+        format.html { redirect_to profile_path(@user), notice: "You are not following #{@user.username}"  }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
