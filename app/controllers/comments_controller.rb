@@ -67,18 +67,25 @@ class CommentsController < ApplicationController
 
   def vote_up
     @article = Article.friendly.find(params[:article_id])
-    @comment.add_or_update_evaluation(:votes, 1, current_user)
+    
     respond_to do |format|
-      format.json { render :vote_up, status: :ok, location: article_comment_path(@article, @comment) }
+      if @comment.add_or_update_evaluation(:votes, 1, current_user)
+        format.json { render json: Integer(@comment.reputation_for(:votes)), status: :ok, location: article_comment_path(@article, @comment) }
+      else
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
+      end  
     end
   end
 
   def vote_down
     @article = Article.friendly.find(params[:article_id])
-    @comment.add_or_update_evaluation(:votes, -1, current_user)
     respond_to do |format|
-      format.json { render :vote_down, status: :ok, location: article_comment_path(@article, @comment) }
-    end
+      if @comment.add_or_update_evaluation(:votes, -1, current_user)
+        format.json { render json: Integer(@comment.reputation_for(:votes)), status: :ok, location: article_comment_path(@article, @comment) }
+      else
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
+      end  
+    end 
   end
 
   private

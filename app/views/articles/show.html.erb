@@ -14,7 +14,7 @@
 
 <ul>
 	<% @article.comments.each do |comment| %>
-		<li><%= comment.user.alias %>: <%= comment.comment %> <%= link_to "Up", vote_up_comment_path(@article, comment), :remote => true %>/<%= link_to "Down", vote_down_comment_path(@article, comment), :remote => true %></li>
+		<li><%= comment.user.alias %>: <%= comment.comment %> (<%= Integer(comment.reputation_for(:votes)) %>) - <%= link_to "Up", vote_up_comment_path(@article, comment), :remote => true %>/<%= link_to "Down", vote_down_comment_path(@article, comment), :remote => true %></li>
 	<% end %>
 </ul>
 
