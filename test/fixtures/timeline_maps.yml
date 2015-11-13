@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  timeline_id: 
+  article_id: 
+
+two:
+  timeline_id: 
+  article_id: 

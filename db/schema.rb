@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151105023757) do
+ActiveRecord::Schema.define(version: 20151112134248) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -143,6 +143,22 @@ ActiveRecord::Schema.define(version: 20151105023757) do
 
   add_index "tags", ["tag"], name: "index_tags_on_tag", unique: true, using: :btree
 
+  create_table "timeline_maps", force: :cascade do |t|
+    t.integer  "timeline_id", limit: 4
+    t.integer  "article_id",  limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "timeline_maps", ["article_id"], name: "index_timeline_maps_on_article_id", using: :btree
+  add_index "timeline_maps", ["timeline_id"], name: "index_timeline_maps_on_timeline_id", using: :btree
+
+  create_table "timelines", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
     t.string   "encrypted_password",     limit: 255, default: "", null: false
@@ -169,4 +185,6 @@ ActiveRecord::Schema.define(version: 20151105023757) do
   add_foreign_key "articles", "users"
   add_foreign_key "comments", "articles"
   add_foreign_key "comments", "users"
+  add_foreign_key "timeline_maps", "articles"
+  add_foreign_key "timeline_maps", "timelines"
 end
